@@ -1,37 +1,66 @@
+<div align="center">
+
 # shefixu
 
-A 3D AI companion that lives in your browser. She talks, listens, blinks, tracks your mouse, and lip-syncs in real time. Built with React Three Fiber and a VRM anime model — no cloud TTS, no subscriptions, runs fully local.
+**A 3D AI companion that lives in your browser.**  
+She talks, listens, blinks, lip-syncs, and tracks your mouse — fully local, no subscriptions.
 
-![Preview](./docs/screenshot.png)
+[![Demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
 
-## 🎬 Demo
+![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-r3f-black?style=flat-square&logo=threedotjs)
+![Python](https://img.shields.io/badge/Python-3.11-3776ab?style=flat-square&logo=python&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+</div>
 
 ---
 
-## How it works
+## What is this
 
-The app is split into three layers that talk to each other:
+I built a browser-based 3D AI companion using a VRM anime model, OpenRouter for the LLM, and a local Python TTS server. Everything except the LLM runs on your machine — no ElevenLabs key, no cloud TTS fees.
 
-**1. The brain** — every message goes to [OpenRouter](https://openrouter.ai/) which routes it to DeepSeek V4 Flash. The system prompt gives her a personality and keeps responses short and natural. Swap the model to anything on OpenRouter without touching anything else.
+The character has:
+- **Procedural idle animation** — spine breathing, arm sway, head bob. No animation clips.
+- **Real-time lip-sync** — audio frequency data from Web Audio API drives mouth morph targets every frame
+- **Mouse head tracking** — she looks where you look
+- **Natural blinking** — randomised blink interval, smooth open/close curve
+- **Voice input** — click mic, talk, she interrupts herself to listen
 
-**2. The voice** — responses get stripped of emojis and markdown, then sent to a local FastAPI server (`tts_server.py`) which calls the [`edge-tts`](https://github.com/rany2/edge-tts) Python library. Audio comes back as an mp3 blob, gets loaded into a Web Audio API analyser node, and the frequency data drives the lip-sync frame by frame.
+---
 
-**3. The model** — a VRM file loaded via `@pixiv/three-vrm`. Every frame (`useFrame`) the code reads `audioLevel`, lerps the `aa` morph target for mouth open/close, runs a blink timer, sways the spine and arms, and rotates the head/neck toward the mouse cursor. No animation clips — all procedural.
+## How it's built
+
+```
+Browser
+  └── React Three Fiber
+        └── @pixiv/three-vrm         ← loads VRM, drives morph targets
+              └── useFrame()          ← procedural animation loop (60fps)
+
+Chat Input / Mic
+  └── Web Speech API                  ← speech-to-text, browser native
+
+AI Response
+  └── fetch → OpenRouter API          ← DeepSeek V4 Flash (swappable)
+        └── text → tts_server.py      ← local FastAPI
+              └── edge-tts            ← Microsoft neural voices, offline
+                    └── mp3 blob → Web Audio API analyser
+                          └── frequency data → audioLevel → morph target
+```
 
 ---
 
 ## Stack
 
-| | |
+| Layer | What |
 |---|---|
-| Frontend | React 19 + TypeScript + Vite |
-| 3D | React Three Fiber + `@pixiv/three-vrm` |
-| Animations | Framer Motion (UI) + procedural `useFrame` (character) |
-| LLM | OpenRouter → DeepSeek V4 Flash |
-| TTS | `edge-tts` → FastAPI → Web Audio API |
-| STT | Web Speech API (browser native, no setup) |
+| 3D rendering | React Three Fiber + `@pixiv/three-vrm` |
+| UI & animations | React 19 + Framer Motion |
+| LLM | [OpenRouter](https://openrouter.ai/) — DeepSeek V4 Flash |
+| TTS | [`edge-tts`](https://github.com/rany2/edge-tts) via local FastAPI (`en-US-AnaNeural`) |
+| STT | Web Speech API (no setup, browser native) |
+| Bundler | Vite |
 
 ---
 
@@ -40,7 +69,7 @@ The app is split into three layers that talk to each other:
 ### Prerequisites
 - Node 18+
 - Python 3.11+
-- An [OpenRouter](https://openrouter.ai/) API key (free tier works)
+- [OpenRouter](https://openrouter.ai/) API key (free tier works fine)
 
 ### Install
 
@@ -51,87 +80,92 @@ npm install
 pip install edge-tts fastapi uvicorn
 ```
 
-### Environment
+### Configure
 
 ```bash
 cp .env.example .env
+# add your OpenRouter key inside
 ```
-
-Edit `.env`:
 
 ```env
 VITE_OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
 
-### Add your VRM model
+### Add a VRM model
 
-Drop any VRM 0.x model into `public/` and name it `model.glb`. Free models at [VRoid Hub](https://hub.vroid.com/en). The character included in the demo is **Alicia Solid**.
+Put any VRM 0.x file in `public/` and name it `model.glb`.  
+Free models → [VRoid Hub](https://hub.vroid.com/en)
 
 ### Run
 
-Terminal 1 — TTS server:
 ```bash
+# Terminal 1 — TTS server
 python3.11 tts_server.py
-# → http://127.0.0.1:8000
-```
 
-Terminal 2 — frontend:
-```bash
+# Terminal 2 — frontend
 npm run dev
-# → http://localhost:5173
 ```
+
+Open `http://localhost:5173`
 
 ---
 
-## Customisation
+## Customise
 
-**Change the AI model** — edit `src/hooks/useAI.ts`:
+**Swap the AI model** (`src/hooks/useAI.ts`):
 ```ts
-model: 'deepseek/deepseek-v4-flash',        // current
-model: 'google/gemini-2.0-flash-lite:free', // free alternative
-model: 'anthropic/claude-3.5-sonnet',       // higher quality
+model: 'deepseek/deepseek-v4-flash',         // default
+model: 'google/gemini-2.0-flash-lite:free',  // free
+model: 'anthropic/claude-3.5-sonnet',        // premium
 ```
 
-**Change the voice** — edit `src/hooks/useSpeech.ts`:
+**Change the voice** (`src/hooks/useSpeech.ts`):
 ```ts
-const VOICE = 'en-US-AnaNeural'; // any edge-tts voice
-const PITCH = '+10Hz';           // higher = more anime-ish
-const RATE  = '+12%';            // speaking speed
+const VOICE = 'en-US-AnaNeural';  // any edge-tts voice
+const PITCH = '+10Hz';
+const RATE  = '+12%';
 ```
+→ List all voices: `edge-tts --list-voices`
 
-List all available voices: `edge-tts --list-voices`
-
-**Change her personality** — edit the `content` field in `src/hooks/useAI.ts`. That's the system prompt.
+**Edit her personality** — change the system prompt in `src/hooks/useAI.ts`
 
 ---
 
-## Project structure
+## Project layout
 
 ```
 src/
 ├── components/
-│   ├── ChatUI.tsx      # chat UI, voice input, interrupt logic
-│   ├── Experience.tsx  # Three.js scene — lighting, camera, grid
-│   └── Model.tsx       # VRM loader, procedural animation, lip-sync
+│   ├── ChatUI.tsx       chat, voice input, interrupt
+│   ├── Experience.tsx   Three.js scene — lighting, camera, grid
+│   └── Model.tsx        VRM loader + all procedural animation
 ├── hooks/
-│   ├── useAI.ts        # OpenRouter fetch
-│   └── useSpeech.ts    # edge-tts client + Web Audio analyser
-tts_server.py           # FastAPI wrapper around edge-tts
-public/
-└── model.glb           # VRM model — not included, add your own
+│   ├── useAI.ts         OpenRouter fetch
+│   └── useSpeech.ts     edge-tts client + Web Audio analyser
+tts_server.py            FastAPI wrapper for edge-tts
 ```
 
 ---
 
 ## Known limitations
 
-- TTS requires the local Python server to be running — no fallback to browser speech in production
-- VRM 1.0 models aren't tested (only 0.x)
-- Lip-sync is audio-frequency based, not phoneme-based — looks good but isn't exact
-- No conversation memory beyond the current session
+- Local TTS server must be running (no cloud fallback)
+- VRM 1.0 not tested — use 0.x
+- Lip-sync is frequency-based, not phoneme-based
+- No persistent memory between sessions
 
 ---
 
 ## License
 
-MIT
+MIT — do whatever you want with it.
+
+---
+
+<div align="center">
+
+Made by [Lumacodes](https://github.com/Lumacodes)
+
+⭐ Star it if you build something with it
+
+</div>
