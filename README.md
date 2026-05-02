@@ -12,7 +12,7 @@ A real-time 3D AI companion powered by a local TTS engine, OpenRouter LLM, and a
 
 - **3D VRM Character** — Anime-style model with live lip-sync, blinking, head tracking, and idle animations
 - **AI Brain** — Powered by [OpenRouter](https://openrouter.ai/) (DeepSeek V4 Flash by default — swap to any model)
-- **Natural Voice** — Microsoft Edge TTS served locally via FastAPI (`en-US-AnaNeural`)
+- **Natural Voice** — [edge-tts](https://github.com/rany2/edge-tts) Python library served locally via FastAPI (`en-US-AnaNeural`, +10Hz pitch, +12% rate)
 - **Voice Input** — Click the mic to talk; speech is transcribed and sent automatically
 - **Interrupt** — Speaking while Aria is talking instantly stops her
 - **Zero cloud dependency for TTS** — runs fully on your machine
