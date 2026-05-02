@@ -2,7 +2,9 @@
 
 A real-time 3D AI companion powered by a local TTS engine, OpenRouter LLM, and a VRM anime character with live facial expressions.
 
-![Preview](./docs/preview.png)
+![Preview](./docs/screenshot.png)
+
+> 🎬 **[Watch the demo](./docs/demo.webp)**
 
 ## ✨ Features
 
