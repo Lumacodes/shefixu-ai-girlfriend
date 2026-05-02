@@ -1,0 +1,57 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+
+# Environment — NEVER commit secrets
+.env
+.env.local
+.env.*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Large binary model files (too big for GitHub, add your own)
+public/model.glb
+public/waifu.vrm
+public/waifu.png
+public/bg.png
+
+# Local TTS server (separate repo, not part of this project)
+Kokoro-TTS-Local/
+
+# Python virtualenvs and caches
+venv/
+venv_311/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Debug / scratch test scripts
+test_*.mjs
+test_*.js
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
