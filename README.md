@@ -19,6 +19,8 @@ She talks back to you in a real voice, listens, blinks, lip-syncs, and tracks yo
 ![Python](https://img.shields.io/badge/Python-3.11-3776ab?style=flat-square&logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
 
+[![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/lumacodes)
+
 </div>
 
 ---
@@ -174,5 +176,8 @@ MIT — do whatever you want with it.
 Made by [Lumacodes](https://github.com/Lumacodes)
 
 ⭐ Star it if you build something with it
+
+If you found this useful, a coffee keeps the projects going 🙏  
+[![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/lumacodes)
 
 </div>
