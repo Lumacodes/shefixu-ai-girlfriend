@@ -7,7 +7,11 @@ She talks back to you in a real voice, listens, blinks, lip-syncs, and tracks yo
 
 ![Preview](./docs/screenshot.png)
 
-[![▶ Watch the demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+**👇 Click to watch the demo**
+
+[![▶ Click here to see the demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+
+*↑ Click the thumbnail to open on YouTube*
 
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)
