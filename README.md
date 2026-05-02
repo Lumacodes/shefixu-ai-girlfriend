@@ -6,7 +6,7 @@ A real-time 3D AI companion powered by a local TTS engine, OpenRouter LLM, and a
 
 ## 🎬 Demo
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/YOCZ-CZZWtw/maxresdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+[![Watch the demo on YouTube](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
 
 ## ✨ Features
 
