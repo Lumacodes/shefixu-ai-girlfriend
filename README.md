@@ -2,10 +2,12 @@
 
 # shefixu
 
-**A 3D AI companion that lives in your browser.**  
-She talks, listens, blinks, lip-syncs, and tracks your mouse — fully local, no subscriptions.
+**Meet Aria — a 3D AI companion that lives in your browser.**  
+She talks back to you in a real voice, listens, blinks, lip-syncs, and tracks your mouse — fully local, no subscriptions.
 
-[![Demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+![Preview](./docs/screenshot.png)
+
+[![▶ Watch the demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
 
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)
@@ -19,9 +21,10 @@ She talks, listens, blinks, lip-syncs, and tracks your mouse — fully local, no
 
 ## What is this
 
-I built a browser-based 3D AI companion using a VRM anime model, OpenRouter for the LLM, and a local Python TTS server. Everything except the LLM runs on your machine — no ElevenLabs key, no cloud TTS fees.
+Aria is a browser-based 3D AI companion. You talk to her, she thinks, and she **talks back out loud** — with a real neural voice generated locally on your machine. Built with a VRM anime model, OpenRouter for the LLM, and a local Python TTS server. No ElevenLabs key, no cloud TTS fees.
 
-The character has:
+Aria has:
+- **Voice** — she speaks every response aloud using Microsoft's `en-US-AnaNeural` neural voice
 - **Procedural idle animation** — spine breathing, arm sway, head bob. No animation clips.
 - **Real-time lip-sync** — audio frequency data from Web Audio API drives mouth morph targets every frame
 - **Mouse head tracking** — she looks where you look
