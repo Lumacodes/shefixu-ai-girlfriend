@@ -6,19 +6,21 @@
 
 <br/>
 
-> **The open-source 3D AI companion that makes Replika look like a chatbot from 2012.**
+> **Built from light and code — an open-source 3D companion that makes the past feel like dial-up.**
 
 <br/>
 
 ![Preview](./docs/screenshot.png)
 
+
 ## 👇 See it in action before you read another word
 
-[![▶ WATCH THE DEMO — you won't believe this runs in a browser](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+[![Demo](https://img.shields.io/badge/🎬-View_Demo-FF5E5B?style=for-the-badge&logo=github&logoColor=white)]([https://your-demo-link.com](https://youtu.be/YOCZ-CZZWtw))
 
-*This is a real browser tab. No Unity. No Unreal. Just React.*
+*From HN headline to published LinkedIn post — all from your phone, in seconds.*
 
-<br/>
+
+
 
 [![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
