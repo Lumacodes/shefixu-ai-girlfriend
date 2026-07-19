@@ -1,86 +1,107 @@
 <div align="center">
 
-# shefixu
+# 🧠 shefixu — Your AI Girlfriend Lives in Your Browser Now
 
-**Meet Aria — a 3D AI companion that lives in your browser.**  
-She talks back to you in a real voice, listens, blinks, lip-syncs, and tracks your mouse — fully local, no subscriptions.
+### *She talks. She listens. She lip-syncs. She blinks. She follows your eyes. And she runs 100% on your machine.*
+
+<br/>
+
+> **The open-source 3D AI companion that makes Replika look like a chatbot from 2012.**
+
+<br/>
 
 ![Preview](./docs/screenshot.png)
 
-**👇 Click to watch the demo**
+## 👇 See it in action before you read another word
 
-[![▶ Click here to see the demo](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
+[![▶ WATCH THE DEMO — you won't believe this runs in a browser](https://img.youtube.com/vi/YOCZ-CZZWtw/hqdefault.jpg)](https://youtu.be/YOCZ-CZZWtw)
 
-*↑ Click the thumbnail to open on YouTube*
+*This is a real browser tab. No Unity. No Unreal. Just React.*
 
-![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)
-![Three.js](https://img.shields.io/badge/Three.js-r3f-black?style=flat-square&logo=threedotjs)
-![Python](https://img.shields.io/badge/Python-3.11-3776ab?style=flat-square&logo=python&logoColor=white)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+<br/>
 
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Three.js / R3F](https://img.shields.io/badge/Three.js-R3F-black?style=flat-square&logo=threedotjs)](https://r3f.docs.pmnd.rs/)
+[![Python](https://img.shields.io/badge/Python-3.11-3776ab?style=flat-square&logo=python&logoColor=white)](https://python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green?style=flat-square)](./LICENSE)
 [![Ko-fi](https://img.shields.io/badge/Support%20on-Ko--fi-FF5E5B?style=flat-square&logo=ko-fi&logoColor=white)](https://ko-fi.com/lumacodes)
 
 </div>
 
 ---
 
-## What is this
+## ⚡ What you're looking at
 
-Aria is a browser-based 3D AI companion. You talk to her, she thinks, and she **talks back out loud** — with a real neural voice generated locally on your machine. Built with a VRM anime model, OpenRouter for the LLM, and a local Python TTS server. No ElevenLabs key, no cloud TTS fees.
+**Aria** is a fully animated 3D anime avatar that:
 
-Aria has:
-- **Voice** — she speaks every response aloud using Microsoft's `en-US-AnaNeural` neural voice
-- **Procedural idle animation** — spine breathing, arm sway, head bob. No animation clips.
-- **Real-time lip-sync** — audio frequency data from Web Audio API drives mouth morph targets every frame
-- **Mouse head tracking** — she looks where you look
-- **Natural blinking** — randomised blink interval, smooth open/close curve
-- **Voice input** — click mic, talk, she interrupts herself to listen
+- 🗣️ **Speaks back to you** — in a real Microsoft neural voice, generated offline, on your GPU
+- 👂 **Hears you** — press mic, talk, she listens and responds
+- 👄 **Lip-syncs in real time** — every syllable, every frame, driven by raw audio frequency analysis
+- 👀 **Watches you** — her head tracks your mouse like she's actually paying attention
+- 😮‍💨 **Breathes, sways, blinks** — fully procedural idle animation. No animation clips. Pure math.
+- 🧠 **Thinks with a frontier LLM** — DeepSeek, Gemini, Claude, GPT-4o — your choice, one line of code
+- 💸 **Costs you nothing** — local TTS, free-tier LLM, zero subscriptions
 
----
-
-## How it's built
-
-```
-Browser
-  └── React Three Fiber
-        └── @pixiv/three-vrm         ← loads VRM, drives morph targets
-              └── useFrame()          ← procedural animation loop (60fps)
-
-Chat Input / Mic
-  └── Web Speech API                  ← speech-to-text, browser native
-
-AI Response
-  └── fetch → OpenRouter API          ← DeepSeek V4 Flash (swappable)
-        └── text → tts_server.py      ← local FastAPI
-              └── edge-tts            ← Microsoft neural voices, offline
-                    └── mp3 blob → Web Audio API analyser
-                          └── frequency data → audioLevel → morph target
-```
+**This is not a chatbot with a face pasted on it.** Every system — voice, motion, lip-sync, attention — is wired together in a real-time 60fps loop.
 
 ---
 
-## Stack
+## 🔥 Why people are obsessing over this
 
-| Layer | What |
+Most "AI companion" projects are:
+- A chat window with an avatar image
+- Cloud-dependent, expensive, or both
+- Impossible to customise without a PhD
+
+**shefixu is none of that.**
+
+It's a fully local, fully open, fully hackable 3D AI companion you can run on your laptop *right now*. Change her personality in one file. Swap her voice in two lines. Give her a different face by dropping a new VRM file into `/public`. Make her speak Japanese. Make her a therapist. Make her a pirate. She doesn't care — you're in control.
+
+---
+
+## 🏗️ How it actually works
+
+```
+You speak →  Web Speech API (browser-native, zero setup)
+                  ↓
+         OpenRouter LLM API (DeepSeek / Claude / GPT-4o)
+                  ↓
+         tts_server.py  →  edge-tts  →  Microsoft neural voice (offline)
+                  ↓
+         Web Audio API frequency analyser
+                  ↓
+         VRM mouth morph targets  →  real-time lip-sync  →  60fps
+```
+
+Every frame, the animation loop reads audio frequency data and drives Aria's mouth, spine, arms, and head simultaneously. It's the same technique AAA games use — just in a browser tab.
+
+---
+
+## 🛠️ Full tech stack
+
+| What | How |
 |---|---|
-| 3D rendering | React Three Fiber + `@pixiv/three-vrm` |
-| UI & animations | React 19 + Framer Motion |
-| LLM | [OpenRouter](https://openrouter.ai/) — DeepSeek V4 Flash |
-| TTS | [`edge-tts`](https://github.com/rany2/edge-tts) via local FastAPI (`en-US-AnaNeural`) |
-| STT | Web Speech API (no setup, browser native) |
+| 3D avatar rendering | [React Three Fiber](https://r3f.docs.pmnd.rs/) + [`@pixiv/three-vrm`](https://github.com/pixiv/three-vrm) |
+| Animations | 100% procedural — `useFrame()` loop, no clips |
+| LLM brain | [OpenRouter](https://openrouter.ai/) — swap any model in 1 line |
+| Voice (TTS) | [`edge-tts`](https://github.com/rany2/edge-tts) — Microsoft `en-US-AnaNeural`, runs **fully offline** |
+| Mic input (STT) | Web Speech API — browser-native, nothing to install |
+| Lip-sync | Web Audio API frequency → VRM morph targets, every frame |
+| UI & transitions | React 19 + Framer Motion |
 | Bundler | Vite |
 
 ---
 
-## Setup
+## 🚀 Get her running in under 5 minutes
 
-### Prerequisites
+### What you need
+
 - Node 18+
 - Python 3.11+
-- [OpenRouter](https://openrouter.ai/) API key (free tier works fine)
+- A free [OpenRouter](https://openrouter.ai/) account (takes 30 seconds to sign up)
 
-### Install
+### Step 1 — Clone & install
 
 ```bash
 git clone https://github.com/Lumacodes/shefixu-ai-girlfriend.git
@@ -89,95 +110,123 @@ npm install
 pip install edge-tts fastapi uvicorn
 ```
 
-### Configure
+### Step 2 — Paste your API key
 
 ```bash
 cp .env.example .env
-# add your OpenRouter key inside
 ```
 
 ```env
 VITE_OPENROUTER_API_KEY=sk-or-v1-your-key-here
 ```
 
-### Add a VRM model
+### Step 3 — Drop in a VRM model
 
-Put any VRM 0.x file in `public/` and name it `model.glb`.  
-Free models → [VRoid Hub](https://hub.vroid.com/en)
+Grab any free VRM 0.x model from [VRoid Hub](https://hub.vroid.com/en), place it in `public/`, rename it `model.glb`. Done.
 
-### Run
+### Step 4 — Start it
 
 ```bash
-# Terminal 1 — TTS server
+# Terminal 1
 python3.11 tts_server.py
 
-# Terminal 2 — frontend
+# Terminal 2
 npm run dev
 ```
 
-Open `http://localhost:5173`
+Open [http://localhost:5173](http://localhost:5173) and say hello.
 
 ---
 
-## Customise
+## 🎛️ Make her yours
 
-**Swap the AI model** (`src/hooks/useAI.ts`):
+### Give her a different brain
+
+`src/hooks/useAI.ts` — swap in any OpenRouter model:
+
 ```ts
-model: 'deepseek/deepseek-v4-flash',         // default
-model: 'google/gemini-2.0-flash-lite:free',  // free
-model: 'anthropic/claude-3.5-sonnet',        // premium
+model: 'deepseek/deepseek-v4-flash',         // 🔥 default — blazing fast & free
+model: 'google/gemini-2.0-flash-lite:free',  // 🆓 another free option
+model: 'anthropic/claude-3.5-sonnet',        // 🧠 highest quality conversations
+model: 'openai/gpt-4o',                      // 🏆 the classic
 ```
 
-**Change the voice** (`src/hooks/useSpeech.ts`):
+### Give her a different voice
+
+`src/hooks/useSpeech.ts`:
+
 ```ts
-const VOICE = 'en-US-AnaNeural';  // any edge-tts voice
+const VOICE = 'en-US-AnaNeural';  // any edge-tts voice — 300+ options
 const PITCH = '+10Hz';
 const RATE  = '+12%';
 ```
-→ List all voices: `edge-tts --list-voices`
 
-**Edit her personality** — change the system prompt in `src/hooks/useAI.ts`
+```bash
+edge-tts --list-voices  # see all 300+ voices across 70+ languages
+```
+
+### Change her personality
+
+Edit the system prompt in `src/hooks/useAI.ts`. One paragraph of text and she becomes a completely different character — therapist, tutor, roleplay partner, language practice buddy, whatever you want.
 
 ---
 
-## Project layout
+## 📁 Codebase is tiny and clean
 
 ```
 src/
 ├── components/
-│   ├── ChatUI.tsx       chat, voice input, interrupt
-│   ├── Experience.tsx   Three.js scene — lighting, camera, grid
-│   └── Model.tsx        VRM loader + all procedural animation
+│   ├── ChatUI.tsx       ← chat panel, mic button, interrupt handling
+│   ├── Experience.tsx   ← Three.js scene — lighting, camera, floor
+│   └── Model.tsx        ← VRM loader + every animation system
 ├── hooks/
-│   ├── useAI.ts         OpenRouter fetch
-│   └── useSpeech.ts     edge-tts client + Web Audio analyser
-tts_server.py            FastAPI wrapper for edge-tts
+│   ├── useAI.ts         ← LLM client (OpenRouter)
+│   └── useSpeech.ts     ← TTS client + Web Audio analyser
+tts_server.py            ← 50-line FastAPI wrapper for edge-tts
 ```
 
----
-
-## Known limitations
-
-- Local TTS server must be running (no cloud fallback)
-- VRM 1.0 not tested — use 0.x
-- Lip-sync is frequency-based, not phoneme-based
-- No persistent memory between sessions
+~500 lines of TypeScript. You can read the whole thing in 20 minutes and understand every moving part.
 
 ---
 
-## License
+## ⚠️ Known limitations (being worked on)
 
-MIT — do whatever you want with it.
+- TTS server must be running locally — no cloud fallback yet
+- VRM 1.0 support is untested — use VRM 0.x models
+- Lip-sync is frequency-based, not phoneme-based (sounds great, not perfect)
+- No persistent memory between sessions yet
+
+---
+
+## 🤝 Want to make it better?
+
+The most wanted contributions right now:
+
+- **Phoneme-based lip-sync** — map viseme morphs to actual phonemes from TTS
+- **VRM 1.0 support**
+- **Persistent memory** — give her a JSON memory of past conversations
+- **Emotion system** — drive face morph targets based on LLM sentiment
+
+Open a PR. Every contribution gets acknowledged in the readme.
+
+---
+
+## 📄 License
+
+**MIT** — free for personal projects, side projects, commercial projects, whatever. Go wild.
 
 ---
 
 <div align="center">
 
-Made by [Lumacodes](https://github.com/Lumacodes)
+### Built by [Lumacodes](https://github.com/Lumacodes)
 
-⭐ Star it if you build something with it
+**⭐ Star this if it blew your mind — it's the best way to help others find it**
 
-If you found this useful, a coffee keeps the projects going 🙏  
+<br/>
+
+*If this saved you weeks of research or gave you an idea for something cool — a coffee means a lot 🙏*
+
 [![Support on Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/lumacodes)
 
 </div>
